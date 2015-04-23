@@ -13,6 +13,5 @@ def update():
     if request.method == "POST":
         accelerometer_data = request.json["accelerometer"]
         temperature_data = request.json["temperature"]
-        dust_data = request.json["dust"]
         humidity_data = request.json["humidity"]
-    return
+    return render_template("index.html")
