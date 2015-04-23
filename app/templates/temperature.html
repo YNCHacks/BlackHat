@@ -41,8 +41,8 @@
     <header class="codrops-header">
       <h1>Black Hat Data Portal</h1>
       <nav class="codrops-demos">
-        <a class="current-demo" href="{{url_for('index')}}">Accelerometer</a>
-        <a href="{{url_for('temp')}}">Temperature</a>
+        <a href="{{url_for('index')}}">Accelerometer</a>
+        <a class="current-demo" href="{{url_for('temp')}}">Temperature</a>
         <a href="{{url_for('humidity')}}">Humidity</a>
         <a href="index4.html">Dust Concentration</a>
       </nav>
@@ -61,7 +61,7 @@
 
   var data_points = []
 
-  $.getJSON("/static/json/accelerometer.json", function(data) {
+  $.getJSON("/static/json/temperature.json", function(data) {
     $.each(data, function(key, val) {
       var bar =
       {
@@ -76,7 +76,7 @@
   {
 
     title:{
-    text: "Accelerometer Data"
+    text: "Temperature Data"
     },
 
     animationEnabled: true,
