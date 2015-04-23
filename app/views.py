@@ -16,4 +16,4 @@ def update():
         accelerometer_data = request.json["Acceleration"]
         data = accelerometer_data
     """
-    return data
+    return {"data" : "hello"}
