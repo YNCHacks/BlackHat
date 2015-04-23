@@ -10,7 +10,7 @@ def index():
 
 @app.route("/update", methods=["GET", "POST"])
 def update():
-    data = {"data": "hello"}
+    data = '{"data": "hello"}'
     """
     if request.method == "POST":
         accelerometer_data = request.json["Acceleration"]
