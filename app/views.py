@@ -42,7 +42,7 @@ def update_json(field, value):
         fp.close()
 
     length = len(data)
-    data[str(length+1)] = value * 500
+    data[str(length+1)] = value
     res = collections.OrderedDict(sorted(data.items()))
     jsonFile = open(abs_file_path, "w+")
     jsonFile.write(json.dumps(res))
