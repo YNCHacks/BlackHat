@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="/static/css/icons.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/style1.css" />
   <script src="/static/js/modernizr.custom.js"></script>
+  <script src="/static/css/bootstrap-theme.min.css"></script>
   <script type="text/javascript" src="/static/js/jquery-1.11.2.min.js"></script>
   <!--<META HTTP-EQUIV="Refresh" CONTENT=5> -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,71 +43,64 @@
       <h1>Black Hat Data Portal</h1>
       <nav class="codrops-demos">
         <a href="{{url_for('index')}}">Accelerometer</a>
-        <a class="current-demo" href="{{url_for('temp')}}">Temperature</a>
+        <a href="{{url_for('temp')}}">Temperature</a>
         <a href="{{url_for('humidity')}}">Humidity</a>
-        <a href="{{url_for('summary')}}">Summary</a>
+        <a class="current-demo" href="{{url_for('summary')}}">Summary</a>
       </nav>
     </header>
     <div class="center-block">
       <div class="row">
         <div class="span12">
-            <div id="chartContainer" style="height: 60%; width: 90%;">
-            </div>
+          {%block content%}
+          <div class="bs-example" style="font-size: 10px;">
+            <table class="table table-hover table-condensed">
+              <thead>
+                <th style="font-size: 1.5em;">Metric</th>
+                <th style="font-size: 1.5em;">Min</th>
+                <th style="font-size: 1.5em;">Max</th>
+                <th style="font-size: 1.5em;">Average</th>
+              </thead>
+              <tbody>
+                {% for metric in final %}
+                  {% include "metric.html" %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="bs-example" style="font-size: 10px;">
+            <table class="table table-hover table-condensed">
+              <thead>
+                <th style="font-size: 1.5em;">Metric</th>
+                <th style="font-size: 1.5em;">Duration over average (min)</th>
+                <th style="font-size: 1.5em;">Duration under average (min)</th>
+              </thead>
+              <tbody>
+                {% for metric in averages %}
+                  {% include "average.html" %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="bs-example" style="font-size: 10px;">
+            <table class="table table-hover table-condensed">
+              <thead>
+                <th style="font-size: 1.5em;">Metric</th>
+                <th style="font-size: 1.5em;">Safety Score</th>
+              </thead>
+              <tbody>
+                {% for metric in scores %}
+                  {% include "score.html" %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          {% endblock %}
           </div>
         </div>
       </div>
     </div>
 
-  <script type="text/javascript">
-
-  var data_points = []
-
-  $.getJSON("/static/json/temperature.json", function(data) {
-    $.each(data, function(key, val) {
-      var bar =
-      {
-        y: val
-      }
-      data_points.push(bar);
-    });
-  });
-
-  window.onload = function () {
-  var chart = new CanvasJS.Chart("chartContainer",
-  {
-
-    title:{
-    text: "Temperature Data"
-    },
-
-    animationEnabled: true,
-     data: [
-    {
-      type: "area",
-      fillOpacity: .3,
-      lineThickness: 2,
-
-      dataPoints: data_points /* [
-      { y: 450 },
-      { y: 414 },
-      { y: 520 },
-      { y: 460 },
-      { y: 450 },
-      { y: 500 },
-      { y: 480 },
-      { y: 480 },
-      { y: 410 },
-      { y: 500 },
-      { y: 480 },
-      { y: 510 }
-    ] */
-    }
-    ]
-  });
-
-  chart.render();
-  }
-  </script>
   <script type="text/javascript" src="/static/js/canvasjs.min.js"></script>
   <script src="/static/js/classie.js"></script>
   <script src="/static/js/borderMenu.js"></script>
