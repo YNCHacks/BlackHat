@@ -6,6 +6,9 @@ import collections
 import operator
 
 @app.route("/", methods=["GET", "POST"])
+def home():
+    return render_template("home.html")
+
 @app.route("/index", methods=["GET", "POST"])
 def index():
     return render_template("index.html")
